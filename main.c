@@ -19,7 +19,7 @@ void move_file(const char *source, const char *dest) {
 
     dest_fd = open(dest, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR);
     if (dest_fd == -1) {
-        perror("Error openning destination file");
+        perror("Error opening destination file");
         close(source_fd);
         exit(1);
     }
@@ -42,14 +42,13 @@ void move_file(const char *source, const char *dest) {
     close(source_fd);
     close(dest_fd);
 
-    // Delete the source file
     if (unlink(source) == -1) {
         perror("Error deleting source file");
     }
 
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char **argv) {
     if (argc != 3) {
         printf("Usage: %s <source_file> <dest_file>\n", argv[0]);
         exit(1);
